@@ -1,0 +1,32 @@
+.Keyboard {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(3, 44px);
+  grid-column-gap: var(--padding-xs);
+  grid-row-gap: var(--padding-xs);
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: var(--padding-s);
+}
+
+.Keyboard > * {
+  grid-column: auto / span 4;
+}
+
+/* 'Enter' and 'Del' key sizing: */
+.Keyboard > :nth-child(21),
+.Keyboard > :last-child {
+  grid-column: auto / span 6;
+}
+
+@media (min-width: 768px) {
+  .Keyboard {
+    max-width: 500px;
+
+    margin: var(--padding-l) auto;
+  }
+}
