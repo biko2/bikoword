@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+:root {
+  --light-font-color: #fff;
+  --font-color: #000;
+  --business-color: #e73f39;
+  --padding-s: 8px;
+  --padding-m: 16px;
+  --padding-l: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--font-color);
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.router {
+  align-self: center;
+  justify-self: center;
+  max-width: 500px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.custom-link {
+  display: inline-block;
+  color: var(--business-color);
+  transform: perspective(1px) translateZ(0);
+  position: relative;
+  cursor: pointer;
+  transition-property: color;
+  transition-duration: 0.3s;
+  text-decoration: none;
+}
+
+.custom-link:hover {
+  color: var(--font-color);
+}
+
+.custom-link::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f9cfce;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+.custom-link:hover::before {
+  transform: scaleX(1);
+}
+
+.inner-link {
+  margin-left: 4px;
+}
