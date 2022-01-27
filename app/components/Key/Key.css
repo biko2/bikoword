@@ -1,5 +1,5 @@
 .Key {
-  padding: 4px;
+  padding: var(--padding-xs);
 
   color: rgb(90, 90, 90);
   background: rgb(231, 231, 231);
