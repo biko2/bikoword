@@ -14,28 +14,31 @@ export const links: LinksFunction = () => {
   return [...keyStyles(), { rel: "stylesheet", href: styles }];
 };
 
-export const Keyboard = ({
+export function Keyboard({
   onKeyPress,
   onEnterPress,
   onDeletePress,
-}: KeyboardType) => {
-  const handleKeyPressed = (pressedKey: string) => {
-    if (pressedKey === "Enter") return onEnterPress();
-
-    if (pressedKey === "Backspace") return onDeletePress();
-
-    if (KEYS.find((key) => key.key === pressedKey))
-      return onKeyPress(pressedKey);
+}: KeyboardType) {
+  const handleKeyPressed = (value: KeyValue) => {
+    if (value === "Enter") {
+      onEnterPress();
+    } else if (value === "Backspace") {
+      onDeletePress();
+    } else {
+      onKeyPress(value.toUpperCase());
+    }
   };
 
   useEffect(() => {
-    const handleKeyPress = (event: Event) => {
+    const listener = (event: KeyboardEvent) => {
       handleKeyPressed(event.key);
     };
 
-    window.addEventListener("keyup", handleKeyPress);
-    return () => window.removeEventListener("keyup", handleKeyPress);
-  }, []);
+    window.addEventListener("keyup", listener);
+    return () => {
+      window.removeEventListener("keyup", listener);
+    };
+  }, [onEnterPress, onDeletePress, onKeyPress]);
 
   return (
     <div className="Keyboard">
@@ -44,4 +47,4 @@ export const Keyboard = ({
       ))}
     </div>
   );
-};
+}

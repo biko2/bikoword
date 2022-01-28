@@ -8,11 +8,11 @@ export function links() {
   return [...GridLinks(), ...KeyboardLinks()];
 }
 
+const dayWord = wordsService.getWordOfDay();
+console.log(`Today's word is... ${dayWord}!`);
+
 const Play = () => {
   const [wordCharacters, setWordCharacters] = useState([]);
-
-  const dayWord = wordsService.getWordOfDay();
-  console.log(`Today's word is... ${dayWord}!`);
 
   const handleKeyPress = (pressedKey: string) => {
     if (wordCharacters.length >= 5) return;
