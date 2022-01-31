@@ -3,7 +3,7 @@ import { useLoaderData } from "remix";
 import { Grid, links as GridLinks } from "~/components/Grid";
 import { Header } from "~/components/Header";
 import { Keyboard, links as KeyboardLinks } from "~/components/Keyboard";
-import { wordsService } from "~/services/wordsService";
+import { wordsService } from "~/core/services/words.service";
 
 export function links() {
   return [...GridLinks(), ...KeyboardLinks()];
