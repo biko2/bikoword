@@ -4,7 +4,7 @@ import { child, get, getDatabase, ref } from "firebase/database";
 const getWords = async (): string[] => {
   const databaseRef = ref(getDatabase(app));
 
-  const snapshot = await get(child(databaseRef, "palabras"));
+  const snapshot = await get(child(databaseRef, "words"));
 
   return snapshot.val();
 };
