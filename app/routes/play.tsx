@@ -1,17 +1,21 @@
 import { useState } from "react";
+import { useLoaderData } from "remix";
 import { Grid, links as GridLinks } from "~/components/Grid";
 import { Header } from "~/components/Header";
 import { Keyboard, links as KeyboardLinks } from "~/components/Keyboard";
-import { wordsService } from "~/services/wordsService";
+import { wordsService } from "~/core/services/words.service";
 
 export function links() {
   return [...GridLinks(), ...KeyboardLinks()];
 }
 
-const dayWord = wordsService.getWordOfDay();
-console.log(`Today's word is... ${dayWord}!`);
+export async function loader() {
+  return await wordsService.getWordOfDay();
+}
 
 const Play = () => {
+  const dayWord = useLoaderData();
+  console.log("La palabra del día es... " + dayWord);
   const [wordCharacters, setWordCharacters] = useState([]);
 
   const handleKeyPress = (pressedKey: string) => {
