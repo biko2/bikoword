@@ -1,6 +1,13 @@
 import { Link } from "remix";
+import { useUser } from "~/hooks/useUser";
 
 export default function Index() {
+  const { user, logout } = useUser();
+
+  const logOut = () => {
+    logout();
+  };
+
   return (
     <nav className="router">
       <p>
@@ -19,6 +26,7 @@ export default function Index() {
           el ranking
         </Link>
       </p>
+      {user && <button onClick={logOut}>Cerrar sesión</button>}
     </nav>
   );
 }
