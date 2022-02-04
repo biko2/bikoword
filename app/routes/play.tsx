@@ -27,7 +27,6 @@ const Play = () => {
 
   const handleEnterPress = () => {
     if (wordCharacters.length === 5) {
-      console.log("check word: ", wordCharacters);
       return;
     }
   };
@@ -39,8 +38,6 @@ const Play = () => {
   };
 
   if (!dayWord) return null;
-
-  console.log("La palabra del día es... ", dayWord);
 
   return (
     <>

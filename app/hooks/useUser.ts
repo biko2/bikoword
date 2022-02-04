@@ -4,14 +4,12 @@ import { auth } from "~/core/infrastructure/firebase";
 import { loginService } from "~/core/services/login.service";
 import { userCookieService } from "~/core/services/userCookie.service";
 import { userDataMapper } from "~/core/utils/userData.mapper";
-import { wordsService } from "~/core/services/words.service";
 
 export const useUser = () => {
   const [user, setUser] = useState<Object>();
 
   useEffect(() => {
-    const cancelAuthListener = onAuthStateChanged(auth, async (user) => {
-      console.log("auth: ", auth);
+    const cancelAuthListener = onAuthStateChanged(auth, (user) => {
       if (user) {
         const userData = userDataMapper.mapData(user);
         userCookieService.setUserCookie(userData);
@@ -33,15 +31,10 @@ export const useUser = () => {
     };
   }, []);
 
-  const login = async () => {
-    const logedUser = await loginService.signInApp();
-    setUser(logedUser);
-  };
-
   const logout = () => {
     loginService.singOutApp();
     setUser(undefined);
   };
 
-  return { user, login, logout };
+  return { user, logout };
 };
