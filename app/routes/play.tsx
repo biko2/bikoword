@@ -1,22 +1,23 @@
-import { useState } from "react";
-import { useLoaderData } from "remix";
+import { useEffect, useState } from "react";
 import { Grid, links as GridLinks } from "~/components/Grid";
-import { Header } from "~/components/Header";
 import { Keyboard, links as KeyboardLinks } from "~/components/Keyboard";
 import { wordsService } from "~/core/services/words.service";
+import { useUser } from "~/hooks/useUser";
 
 export function links() {
   return [...GridLinks(), ...KeyboardLinks()];
 }
 
-export async function loader() {
-  return await wordsService.getWordOfDay();
-}
-
 const Play = () => {
-  const dayWord = useLoaderData();
-  console.log("La palabra del día es... " + dayWord);
-  const [wordCharacters, setWordCharacters] = useState([]);
+  const [dayWord, setDayWord] = useState<string>();
+  const [wordCharacters, setWordCharacters] = useState<string[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const word = await wordsService.getWordOfDay();
+      setDayWord(word);
+    })();
+  }, []);
 
   const handleKeyPress = (pressedKey: string) => {
     if (wordCharacters.length >= 5) return;
@@ -26,7 +27,6 @@ const Play = () => {
 
   const handleEnterPress = () => {
     if (wordCharacters.length === 5) {
-      console.log("check word: ", wordCharacters);
       return;
     }
   };
@@ -37,9 +37,10 @@ const Play = () => {
     }
   };
 
+  if (!dayWord) return null;
+
   return (
     <>
-      <Header />
       <Grid />
       <Keyboard
         onKeyPress={handleKeyPress}

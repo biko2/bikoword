@@ -1,12 +1,5 @@
-import { Header } from "~/components/Header";
-
 const Ranking = () => {
-  return (
-    <>
-      <Header />
-      holiiii
-    </>
-  );
+  return <>holiiii</>;
 };
 
 export default Ranking;

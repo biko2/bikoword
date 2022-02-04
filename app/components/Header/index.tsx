@@ -1,7 +1,11 @@
 import { Link } from "remix";
+import { loginService } from "~/core/services/login.service";
+import { useUser } from "~/hooks/useUser";
 import logo from "~/images/logo-biko.svg";
 
 export const Header = () => {
+  const { user } = useUser();
+
   return (
     <div className="header">
       <Link to="/" className="header-item">
@@ -10,18 +14,22 @@ export const Header = () => {
           Word
         </h1>
       </Link>
-      <ul className="navigation">
-        <li>
-          <Link to="/play" className="header-item custom-link">
-            Palabra del día
-          </Link>
-        </li>
-        <li>
-          <Link to="/ranking" className="header-item custom-link">
-            Ranking
-          </Link>
-        </li>
-      </ul>
+      {!user ? (
+        <button onClick={loginService.signInApp}>Iniciar sesión</button>
+      ) : (
+        <ul className="navigation">
+          <li>
+            <Link to="/play" className="header-item custom-link">
+              Palabra del día
+            </Link>
+          </li>
+          <li>
+            <Link to="/ranking" className="header-item custom-link">
+              Ranking
+            </Link>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };

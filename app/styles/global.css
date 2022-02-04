@@ -82,5 +82,6 @@ body {
 }
 
 .inner-link {
+  align-self: flex-start;
   margin-left: 4px;
 }

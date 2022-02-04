@@ -11,6 +11,7 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 import { links as playLinks } from "./routes/play";
+import { Header } from "./components/Header";
 
 export function links() {
   return [
@@ -24,6 +25,14 @@ export const meta: MetaFunction = () => ({ title: "BikoWord" });
 
 export default function App() {
   return (
+    <Document>
+      <Outlet />
+    </Document>
+  );
+}
+
+function Document({ children }) {
+  return (
     <html lang="es">
       <head>
         <meta charSet="utf-8" />
@@ -32,11 +41,20 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <Layout>{children}</Layout>
       </body>
     </html>
+  );
+}
+
+function Layout({ children }) {
+  return (
+    <>
+      <Header />
+      {children}
+      <ScrollRestoration />
+      <Scripts />
+      {process.env.NODE_ENV === "development" && <LiveReload />}
+    </>
   );
 }
