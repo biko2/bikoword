@@ -1,4 +1,4 @@
-import { signInWithPopup, signInWithRedirect, signOut } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider } from "../infrastructure/firebase";
 
 async function signInApp() {
