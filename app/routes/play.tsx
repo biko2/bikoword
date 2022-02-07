@@ -11,6 +11,7 @@ export function links() {
 const Play = () => {
   const [dayWord, setDayWord] = useState<string>();
   const [wordCharacters, setWordCharacters] = useState<string[]>([]);
+  const [guesses, setGuesses] = useState<string[][]>([]);
 
   useEffect(() => {
     (async () => {
@@ -27,7 +28,8 @@ const Play = () => {
 
   const handleEnterPress = () => {
     if (wordCharacters.length === 5) {
-      return;
+      setGuesses([...guesses, wordCharacters]);
+      return setWordCharacters([]);
     }
   };
 
@@ -41,7 +43,7 @@ const Play = () => {
 
   return (
     <>
-      <Grid />
+      <Grid guesses={guesses} currentGuess={wordCharacters} />
       <Keyboard
         onKeyPress={handleKeyPress}
         onEnterPress={handleEnterPress}
