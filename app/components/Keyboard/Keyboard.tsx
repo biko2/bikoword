@@ -20,12 +20,13 @@ export function Keyboard({
   onDeletePress,
 }: KeyboardType) {
   const handleKeyPressed = (value: KeyValue) => {
-    if (value === "Enter") {
-      onEnterPress();
-    } else if (value === "Backspace") {
-      onDeletePress();
-    } else {
-      onKeyPress(value.toUpperCase());
+    switch (value) {
+      case "Enter":
+        return onEnterPress();
+      case "Backspace":
+        return onDeletePress();
+      default:
+        return "a" <= value && value <= "z" && onKeyPress(value.toUpperCase());
     }
   };
 
