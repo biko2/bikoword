@@ -20,12 +20,12 @@ export function Keyboard({
   onDeletePress,
 }: KeyboardType) {
   const onKeyPressAction: Record<string, Function> = {
-    enter: onEnterPress,
-    backSpace: onDeletePress,
+    Enter: onEnterPress,
+    Backspace: onDeletePress,
   };
 
   const handleKeyPressed = (value: string) => {
-    const regex = /[a-z]/gi;
+    const regex = /^[a-z]$/gi;
     return regex.test(value)
       ? onKeyPress(value.toUpperCase())
       : onKeyPressAction[value]();
