@@ -19,15 +19,16 @@ export function Keyboard({
   onEnterPress,
   onDeletePress,
 }: KeyboardType) {
-  const handleKeyPressed = (value: KeyValue) => {
-    switch (value) {
-      case "Enter":
-        return onEnterPress();
-      case "Backspace":
-        return onDeletePress();
-      default:
-        return "a" <= value && value <= "z" && onKeyPress(value.toUpperCase());
-    }
+  const onKeyPressAction: Record<string, Function> = {
+    enter: onEnterPress,
+    backSpace: onDeletePress,
+  };
+
+  const handleKeyPressed = (value: string) => {
+    const regex = /[a-z]/gi;
+    return regex.test(value)
+      ? onKeyPress(value.toUpperCase())
+      : onKeyPressAction[value]();
   };
 
   useEffect(() => {
