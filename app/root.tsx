@@ -12,6 +12,9 @@ import {
 import type { MetaFunction } from "remix";
 import { links as playLinks } from "./routes/play";
 import { Header } from "./components/Header";
+import { useEffect } from "react";
+import { wordsService } from "./core/services/words.service";
+import { localStorageService } from "./core/services/localStorage.service";
 
 export function links() {
   return [
@@ -48,6 +51,15 @@ function Document({ children }) {
 }
 
 function Layout({ children }) {
+  useEffect(() => {
+    (async () => {
+      const previousSolution = localStorageService.getSolution();
+      await wordsService.setWordOfDay();
+      if (previousSolution !== localStorageService.getSolution()) {
+        localStorageService.removeItem("guesses");
+      }
+    })();
+  });
   return (
     <>
       <Header />

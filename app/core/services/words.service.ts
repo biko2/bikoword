@@ -1,5 +1,6 @@
 import { app } from "../infrastructure/firebase";
 import { child, get, getDatabase, ref } from "firebase/database";
+import { localStorageService } from "./localStorage.service";
 
 const getWords = async (): string[] => {
   const databaseRef = ref(getDatabase(app));
@@ -9,7 +10,7 @@ const getWords = async (): string[] => {
   return snapshot.val();
 };
 
-const getWordOfDay = async (): string => {
+const setWordOfDay = async (): string => {
   const words = await getWords();
   // January 1, 2022 Game Epoch
   const startDate = new Date("January 1, 2022 00:00:00").valueOf();
@@ -17,9 +18,9 @@ const getWordOfDay = async (): string => {
   const msInDay = 86400000;
   const index = Math.floor((now - startDate) / msInDay);
 
-  return words[index % words.length].toUpperCase();
+  localStorageService.saveSolution(words[index % words.length].toUpperCase());
 };
 
 export const wordsService = {
-  getWordOfDay,
+  setWordOfDay,
 };
