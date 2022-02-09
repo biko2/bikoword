@@ -1,7 +1,7 @@
 import { Link } from "remix";
 import { loginService } from "~/core/services/login.service";
 import { useUser } from "~/hooks/useUser";
-import logo from "~/images/logo-biko.svg";
+import logo from "~/images/Logo.svg";
 
 export const Header = () => {
   const { user } = useUser();
@@ -11,7 +11,6 @@ export const Header = () => {
       <Link to="/" className="header-item">
         <h1 className="site-title">
           <img src={logo} alt="logo" className="site-logo" />
-          Word
         </h1>
       </Link>
       {!user ? (

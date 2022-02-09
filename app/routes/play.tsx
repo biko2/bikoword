@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Grid, links as GridLinks } from "~/components/Grid";
 import { Keyboard, links as KeyboardLinks } from "~/components/Keyboard";
+import { WORD_LENGTH } from "~/constants";
 import { wordsService } from "~/core/services/words.service";
-import { useUser } from "~/hooks/useUser";
 
 export function links() {
   return [...GridLinks(), ...KeyboardLinks()];
@@ -11,6 +11,7 @@ export function links() {
 const Play = () => {
   const [dayWord, setDayWord] = useState<string>();
   const [wordCharacters, setWordCharacters] = useState<string[]>([]);
+  const [guesses, setGuesses] = useState<string[][]>([]);
 
   useEffect(() => {
     (async () => {
@@ -20,14 +21,15 @@ const Play = () => {
   }, []);
 
   const handleKeyPress = (pressedKey: string) => {
-    if (wordCharacters.length >= 5) return;
+    if (wordCharacters.length >= WORD_LENGTH) return;
 
     return setWordCharacters((previous: string[]) => [...previous, pressedKey]);
   };
 
   const handleEnterPress = () => {
-    if (wordCharacters.length === 5) {
-      return;
+    if (wordCharacters.length === WORD_LENGTH) {
+      setGuesses([...guesses, wordCharacters]);
+      return setWordCharacters([]);
     }
   };
 
@@ -41,7 +43,7 @@ const Play = () => {
 
   return (
     <>
-      <Grid />
+      <Grid guesses={guesses} currentGuess={wordCharacters} />
       <Keyboard
         onKeyPress={handleKeyPress}
         onEnterPress={handleEnterPress}
