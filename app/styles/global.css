@@ -4,6 +4,13 @@
   --light-font-color: #fff;
   --font-color: #000;
   --business-color: #e73f39;
+  --absent-color: #c4c9cc;
+  --absent-border-color: #899398;
+  --present-color: #dacf71;
+  --present-border-color: #a77831;
+  --correct-color: #77a355;
+  --correct-border-color: #1a4829;
+  --cell-border-color: #899398;
   --padding-xs: 4px;
   --padding-s: 8px;
   --padding-m: 16px;
