@@ -25,7 +25,7 @@ export const Grid = ({ guesses = [], currentGuess }: Props) => {
   return (
     <div className="word-grid">
       {guesses.map((word, index) => (
-        <Row key={index} guess={word} />
+        <Row key={index} guess={word} completed />
       ))}
       {guesses.length < MAX_TRIES && <Row guess={currentGuess} />}
       {emptyRows.map((_, index) => (

@@ -3,6 +3,22 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #000;
+  border: 1px solid var(--cell-border-color);
+  border-radius: 10px;
   background: #fff;
+}
+
+.absent {
+  background: var(--absent-color);
+  border-color: var(--absent-border-color);
+}
+
+.present {
+  background: var(--present-color);
+  border-color: var(--present-border-color);
+}
+
+.correct {
+  background: var(--correct-color);
+  border-color: var(--correct-border-color);
 }

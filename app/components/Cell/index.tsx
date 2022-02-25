@@ -1,3 +1,4 @@
+import { CharStatus } from "~/core/services/status.service";
 import styles from "./styles.css";
 
 export function links() {
@@ -6,8 +7,9 @@ export function links() {
 
 interface Props {
   children?: any;
+  status?: CharStatus;
 }
 
-export const Cell = ({ children }: Props) => {
-  return <div className="word-cell">{children}</div>;
+export const Cell = ({ children, status }: Props) => {
+  return <div className={`word-cell ${!!status && status}`}>{children}</div>;
 };
