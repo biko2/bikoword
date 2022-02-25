@@ -1,47 +1,72 @@
 import { useEffect, useState } from "react";
 import { Grid, links as GridLinks } from "~/components/Grid";
 import { Keyboard, links as KeyboardLinks } from "~/components/Keyboard";
-import { WORD_LENGTH } from "~/constants";
+import { MAX_TRIES, WORD_LENGTH } from "~/constants";
+import { gameService } from "~/core/services/game.service";
 import { localStorageService } from "~/core/services/localStorage.service";
-import { wordsService } from "~/core/services/words.service";
+import { gameUtils } from "~/core/utils/gameStatus.utils";
 
 export function links() {
   return [...GridLinks(), ...KeyboardLinks()];
 }
 
 const Play = () => {
-  const [dayWord, setDayWord] = useState<string>();
+  const [isGameWon, setIsGameWon] = useState<boolean>();
+  const [isGameLost, setIsGameLost] = useState<boolean>(false);
   const [wordCharacters, setWordCharacters] = useState<string[]>([]);
-  const [guesses, setGuesses] = useState<string[][]>();
+  const [guesses, setGuesses] = useState<string[][]>([]);
+  const [stats, setStats] = useState();
 
   useEffect(() => {
-    const solution = localStorageService.getSolution();
-    setDayWord(solution);
-    const loadedGuesses = localStorageService.getItem("guesses");
+    const loadedGuesses = localStorageService.getGuesses();
     setGuesses(loadedGuesses ?? []);
+    const gameStats = gameService.loadStats();
+
+    setStats(gameStats);
+
+    setIsGameWon(gameUtils.checkGameIsWon());
+    setIsGameLost(gameUtils.checkGameIsLost());
   }, []);
 
   const handleKeyPress = (pressedKey: string) => {
-    if (wordCharacters.length >= WORD_LENGTH) return;
+    if (isGameWon || isGameLost || wordCharacters.length >= WORD_LENGTH) return;
 
     return setWordCharacters((previous: string[]) => [...previous, pressedKey]);
   };
 
   const handleEnterPress = () => {
-    if (wordCharacters.length === WORD_LENGTH) {
-      setGuesses([...guesses, wordCharacters]);
-      localStorageService.setItem("guesses", [...guesses, wordCharacters]);
-      return setWordCharacters([]);
+    if (isGameWon || isGameLost || wordCharacters.length !== WORD_LENGTH) {
+      return;
+    }
+
+    setGuesses([...guesses, wordCharacters]);
+    localStorageService.setItem("guesses", [...guesses, wordCharacters]);
+    setWordCharacters([]);
+
+    const winningWord = localStorageService.getSolution();
+
+    if (wordCharacters.join("") === winningWord) {
+      console.log("omg you won!!");
+      setStats(gameService.saveStats(stats, guesses.length));
+      setIsGameWon(true);
+    }
+
+    if (guesses.length === MAX_TRIES - 1) {
+      console.log("youre a fucking looser");
+      setStats(gameService.saveStats(stats, guesses.length + 1));
+      setIsGameLost(true);
     }
   };
 
   const handleDeletePress = () => {
+    if (isGameWon || isGameLost) {
+      return;
+    }
+
     if (wordCharacters.length > 0) {
       return setWordCharacters((previous: string[]) => previous.slice(0, -1));
     }
   };
-
-  if (!dayWord) return null;
 
   return (
     <>
