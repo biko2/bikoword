@@ -17,6 +17,8 @@ const Play = () => {
   const [guesses, setGuesses] = useState<string[][]>([]);
   const [stats, setStats] = useState();
 
+  const isGameEnded = isGameLost || isGameWon;
+
   useEffect(() => {
     const loadedGuesses = localStorageService.getGuesses();
     setGuesses(loadedGuesses ?? []);
@@ -29,13 +31,13 @@ const Play = () => {
   }, []);
 
   const handleKeyPress = (pressedKey: string) => {
-    if (isGameWon || isGameLost || wordCharacters.length >= WORD_LENGTH) return;
+    if (isGameEnded || wordCharacters.length >= WORD_LENGTH) return;
 
     return setWordCharacters((previous: string[]) => [...previous, pressedKey]);
   };
 
   const handleEnterPress = () => {
-    if (isGameWon || isGameLost || wordCharacters.length !== WORD_LENGTH) {
+    if (isGameEnded || wordCharacters.length !== WORD_LENGTH) {
       return;
     }
 
@@ -52,14 +54,14 @@ const Play = () => {
     }
 
     if (guesses.length === MAX_TRIES - 1) {
-      console.log("youre a fucking looser");
+      console.log("youre a fucking mofet");
       setStats(gameService.saveStats(stats, guesses.length + 1));
       setIsGameLost(true);
     }
   };
 
   const handleDeletePress = () => {
-    if (isGameWon || isGameLost) {
+    if (isGameEnded) {
       return;
     }
 
