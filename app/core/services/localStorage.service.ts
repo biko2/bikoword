@@ -14,7 +14,8 @@ const getSolution = () => {
       1,
       rawEncodedSolution.length - 1
     );
-    return encodedSolution;
+
+    return window.atob(encodedSolution);
   }
 
   return null;
