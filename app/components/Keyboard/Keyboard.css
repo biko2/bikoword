@@ -4,13 +4,10 @@
   grid-template-rows: repeat(3, 44px);
   grid-column-gap: var(--padding-xs);
   grid-row-gap: var(--padding-xs);
+  width: 100%;
 
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  margin: var(--padding-s);
+  margin: var(--padding-s) auto;
+  max-width: 500px;
 }
 
 .Keyboard > * {
@@ -25,8 +22,6 @@
 
 @media (min-width: 768px) {
   .Keyboard {
-    max-width: 500px;
-
     margin: var(--padding-l) auto;
   }
 }
