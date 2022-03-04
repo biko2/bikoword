@@ -21,7 +21,7 @@ const Play = () => {
 
   useEffect(() => {
     const loadedGuesses = localStorageService.getGuesses();
-    setGuesses(loadedGuesses ?? []);
+    setGuesses(loadedGuesses);
     const gameStats = gameService.loadStats();
 
     setStats(gameStats);
@@ -29,6 +29,12 @@ const Play = () => {
     setIsGameWon(gameUtils.checkGameIsWon());
     setIsGameLost(gameUtils.checkGameIsLost());
   }, []);
+
+  useEffect(() => {
+    if (isGameEnded) {
+      console.log("game ended, check your status");
+    }
+  }, [isGameEnded]);
 
   const handleKeyPress = (pressedKey: string) => {
     if (isGameEnded || wordCharacters.length >= WORD_LENGTH) return;
@@ -42,7 +48,10 @@ const Play = () => {
     }
 
     setGuesses([...guesses, wordCharacters]);
-    localStorageService.setItem("guesses", [...guesses, wordCharacters]);
+    localStorageService.setItem(
+      "guesses",
+      JSON.stringify([...guesses, wordCharacters])
+    );
     setWordCharacters([]);
 
     const winningWord = localStorageService.getSolution();

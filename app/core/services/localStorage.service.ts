@@ -6,30 +6,20 @@ const saveSolution = (solution: string) => {
 };
 
 const getSolution = () => {
-  const rawEncodedSolution = localStorage.getItem("solution");
+  const encodedSolution = localStorage.getItem("solution");
 
-  if (rawEncodedSolution) {
-    // it returns with double quotes idk why
-    const encodedSolution = rawEncodedSolution.substring(
-      1,
-      rawEncodedSolution.length - 1
-    );
-
-    return window.atob(encodedSolution);
-  }
-
-  return null;
+  return encodedSolution ? window.atob(encodedSolution) : null;
 };
 
 const setItem = (name: string, value: any) => {
-  const stringifiedValue = JSON.stringify(value);
+  const stringifiedValue = value;
 
   localStorage.setItem(name, stringifiedValue);
 };
 
 const getGuesses = (): string[][] => {
   const element = localStorage.getItem("guesses");
-  return element ? JSON.parse(element) : null;
+  return element ? JSON.parse(element) : [];
 };
 
 const removeItem = (name: string) => {
