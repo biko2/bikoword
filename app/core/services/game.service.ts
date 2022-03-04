@@ -1,5 +1,8 @@
 import { MAX_TRIES } from "~/constants";
 import { localStorageService } from "./localStorage.service";
+import { rankingService } from "./ranking.service";
+import { scoringService } from "./scoring.service";
+import { userCookieService } from "./userCookie.service";
 
 export type GameStats = {
   winsTree: number[];
@@ -41,6 +44,14 @@ const saveStats = (gameStats: GameStats, incorrectGuessesBeforeEnd: number) => {
   stats.successRate = getSuccessRate(stats);
 
   localStorageService.saveGameState(stats);
+
+  const user = userCookieService.getUserFromCookie();
+  const playScore = scoringService.getTotalPoints(
+    incorrectGuessesBeforeEnd + 1
+  );
+
+  !!user && rankingService.setPersonalScore(user, playScore);
+
   return stats;
 };
 
