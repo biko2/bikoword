@@ -1,6 +1,6 @@
 :root {
   --header-size: 170px;
-  --header-small-size: 150px;
+  --header-small-size: 130px;
 }
 
 .header {
@@ -13,6 +13,8 @@
   text-align: center;
 
   height: var(--header-size);
+
+  background: white;
 }
 
 .navigation {
