@@ -1,11 +1,10 @@
 import type { LinksFunction } from "remix";
+import type { Key as KeyContentType } from "~/components/Keyboard";
 import styles from "./Key.css";
 
 type KeyType = {
-  keyContent: {
-    text: string;
-    key: string;
-  };
+  status: string | undefined;
+  keyContent: KeyContentType;
   onKeyPress: Function;
 };
 
@@ -17,9 +16,12 @@ const capitalize = (text: string) => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
-export const Key = ({ keyContent, onKeyPress }: KeyType) => {
+export const Key = ({ status, keyContent, onKeyPress }: KeyType) => {
   return (
-    <button className="Key" onClick={() => onKeyPress(keyContent.key)}>
+    <button
+      className={`Key ${!!status ? status : ""}`}
+      onClick={() => onKeyPress(keyContent.key)}
+    >
       <p>{capitalize(keyContent.text)}</p>
     </button>
   );

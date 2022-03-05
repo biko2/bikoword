@@ -83,6 +83,7 @@ const Play = () => {
     <>
       <Grid guesses={guesses} currentGuess={wordCharacters} />
       <Keyboard
+        guesses={guesses}
         onKeyPress={handleKeyPress}
         onEnterPress={handleEnterPress}
         onDeletePress={handleDeletePress}

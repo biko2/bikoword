@@ -24,6 +24,22 @@
   transform-origin: bottom;
 }
 
+.Key.absent {
+  background: var(--absent-color);
+}
+.Key.correct {
+  background: var(--correct-color);
+}
+.Key.present {
+  background: var(--present-color);
+}
+
+.Key.absent p,
+.Key.present p,
+.Key.correct p {
+  color: white;
+}
+
 .Key:active p {
   transform: scaleX(1.2);
 }
