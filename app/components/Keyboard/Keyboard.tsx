@@ -45,7 +45,6 @@ export function Keyboard({
   };
 
   useEffect(() => {
-    // console.log(statusService.getGuessCharsStatus());
     setUsedChars(statusService.getGuessCharsStatus());
   }, [guesses]);
 
@@ -60,18 +59,13 @@ export function Keyboard({
     };
   }, [onEnterPress, onDeletePress, onKeyPress]);
 
-  const getKeyStatus = (key: Key) => {
-    // console.log(usedChars);
+  const getKeyStatus = (key: Key): string => {
     const usedChar = usedChars.find((char) => {
       return char.key == key.text.toUpperCase();
     });
 
     if (!usedChar) return "";
     return usedChar.status;
-
-    // console.log(usedChars[charIndex].status);
-
-    // return usedChars[charIndex].status;
   };
 
   return (
