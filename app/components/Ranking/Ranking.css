@@ -1,0 +1,35 @@
+.rankingRow {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: var(--padding-s);
+}
+
+.rankingRow * {
+  font-size: 14px;
+}
+
+.rankingRow:nth-child(even) {
+  list-style: none;
+  background-color: #f5f6f7;
+}
+
+.rankingRow .score,
+.rankingRow .position {
+  color: #4e5c65;
+}
+
+.rankingRow .position {
+  font-weight: bold;
+  margin-right: var(--padding-l);
+}
+
+.rankingRow .score {
+  font-family: "Courier Prime";
+}
+
+.rankingRow .name {
+  font-weight: bold;
+}

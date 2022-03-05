@@ -1,20 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
 
 :root {
   --light-font-color: #fff;
-  --font-color: #000;
+  --font-color: #20314b;
   --business-color: #e73f39;
+  --business-color-2: #ed6f6b;
+  --business-color-3: #f39f9c;
   --absent-color: #c4c9cc;
   --absent-border-color: #899398;
   --present-color: #dacf71;
   --present-border-color: #a77831;
   --correct-color: #77a355;
   --correct-border-color: #1a4829;
-  --cell-border-color: #899398;
+  --cell-border-color: #c4c9cc;
   --padding-xs: 4px;
   --padding-s: 8px;
   --padding-m: 16px;
   --padding-l: 24px;
+  --padding-xl: 36px;
+
+  --cell-size: 60px;
+  --podium-size: 90px;
 }
 
 * {
@@ -47,6 +54,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  padding: var(--padding-s);
 }
 
 .custom-link {
@@ -90,5 +99,5 @@ body {
 
 .inner-link {
   align-self: flex-start;
-  margin-left: 4px;
+  margin-left: var(--padding-xs);
 }

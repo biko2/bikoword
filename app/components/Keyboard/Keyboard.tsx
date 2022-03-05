@@ -25,10 +25,13 @@ export function Keyboard({
   };
 
   const handleKeyPressed = (value: string) => {
-    const regex = /^[a-z]$/gi;
-    return regex.test(value)
-      ? onKeyPress(value.toUpperCase())
-      : onKeyPressAction[value.toLowerCase()]();
+    const regex = /^[a-z\u00f1\u00d1]$/gi;
+    if (regex.test(value)) {
+      return onKeyPress(value.toUpperCase());
+    }
+    if (onKeyPressAction[value.toLowerCase()]) {
+      return onKeyPressAction[value.toLowerCase()]();
+    }
   };
 
   useEffect(() => {
