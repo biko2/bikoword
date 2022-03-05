@@ -7,7 +7,13 @@
   width: 100%;
 
   margin: var(--padding-s) auto;
+  padding: 0 var(--padding-s);
   max-width: 500px;
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .Keyboard > * {

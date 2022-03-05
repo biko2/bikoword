@@ -24,7 +24,7 @@ export function links() {
   ];
 }
 
-export const meta: MetaFunction = () => ({ title: "BikoWord" });
+export const meta: MetaFunction = () => ({ title: "BikoWordle" });
 
 export default function App() {
   return (
