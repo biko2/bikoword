@@ -6,6 +6,9 @@
   border: 1px solid var(--cell-border-color);
   border-radius: 10px;
   background: #fff;
+
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .absent {
@@ -21,4 +24,10 @@
 .correct {
   background: var(--correct-color);
   border-color: var(--correct-border-color);
+}
+
+.absent,
+.present,
+.correct {
+  color: white;
 }

@@ -1,0 +1,73 @@
+.podium {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 60px;
+}
+
+.podium > *:not(:last-child) {
+  margin-right: 20px;
+}
+
+.podium .userData {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.podium .score {
+  font-family: "Courier Prime";
+  font-weight: normal;
+  color: #4e5c65;
+}
+
+.top-1,
+.top-2,
+.top-3 {
+  text-align: center;
+}
+
+.top-1 {
+  order: 1;
+}
+.top-2 {
+  transform: translateY(var(--padding-l));
+}
+.top-3 {
+  order: 2;
+  transform: translateY(var(--padding-xl));
+}
+
+.avatar {
+  border-radius: 50%;
+  width: var(--podium-size);
+  height: var(--podium-size);
+  object-fit: cover;
+}
+
+.top-2 .avatar {
+  transform: scale(0.9);
+}
+
+.top-3 .avatar {
+  transform: scale(0.8);
+}
+
+.top-1 .position,
+.top-2 .position,
+.top-3 .position {
+  margin-right: var(--padding-xs);
+}
+
+.top-1 .position {
+  font-size: 18px;
+  color: var(--business-color);
+}
+.top-2 .position {
+  font-size: 16px;
+  color: var(--business-color-2);
+}
+.top-3 .position {
+  font-size: 14px;
+  color: var(--business-color-3);
+}

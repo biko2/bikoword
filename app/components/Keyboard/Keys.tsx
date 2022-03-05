@@ -80,7 +80,7 @@ export const KEYS = [
     key: "ñ",
   },
   {
-    text: "enter",
+    text: "Go!",
     key: "Enter",
   },
   {

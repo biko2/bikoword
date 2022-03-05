@@ -19,8 +19,8 @@ const capitalize = (text: string) => {
 
 export const Key = ({ keyContent, onKeyPress }: KeyType) => {
   return (
-    <div className="Key" onClick={() => onKeyPress(keyContent.key)}>
-      {capitalize(keyContent.text)}
-    </div>
+    <button className="Key" onClick={() => onKeyPress(keyContent.key)}>
+      <p>{capitalize(keyContent.text)}</p>
+    </button>
   );
 };
