@@ -11,7 +11,7 @@ export default function Index() {
   return (
     <nav className="router">
       <p>
-        Bienvenido a <strong>BikoWord</strong>,<br />
+        Bienvenido a <strong>BikoWordle</strong>,<br />
         ¡La nueva app de Biko customizada para jugar al Wordle!
       </p>
       <p>
