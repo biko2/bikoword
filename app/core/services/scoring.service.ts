@@ -1,6 +1,8 @@
 import { scoring } from "../domain/scoring.config";
 
-const getTimingPoints = (timeInSeconds: number): number => {
+const getTimingPoints = (timeInSeconds?: number): number => {
+  if (!timeInSeconds) return 0;
+
   const minutesGuessing = timeInSeconds / 60;
   const hasRemainingSeconds = minutesGuessing % 2 !== 0;
   const timePoints = scoring.timing;
@@ -30,12 +32,12 @@ const getTriesPoints = (tries: number): number => {
 };
 
 const getTotalPoints = (
-  timeInSeconds: number,
   tries: number,
-  timesLettersRepeated: number
+  timeInSeconds?: number,
+  timesLettersRepeated: number = 0
 ): number => {
-  const timingPoints = getTimingPoints(timeInSeconds);
   const triesPoints = getTriesPoints(tries);
+  const timingPoints = getTimingPoints(timeInSeconds);
   const repeatedLettersPoints = timesLettersRepeated * 5;
 
   return timingPoints + triesPoints - repeatedLettersPoints;
