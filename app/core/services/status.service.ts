@@ -40,6 +40,24 @@ export const getWordStatus = (guess: string[]): CharStatus[] => {
   return statuses;
 };
 
+const buildFinalGraph = (guesses: string[][]): string[][] => {
+  const guessesWithStatus = guesses.map((guess) => getWordStatus(guess));
+
+  return guessesWithStatus.map((guessWithStatus) => {
+    return guessWithStatus.map((letterStatus) => {
+      switch (letterStatus) {
+        case "absent":
+          return "⬜";
+        case "correct":
+          return "🟩";
+        case "present":
+          return "🟨";
+      }
+    });
+  });
+};
+
 export const statusService = {
   getWordStatus,
+  buildFinalGraph,
 };
