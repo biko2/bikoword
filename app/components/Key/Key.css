@@ -1,12 +1,9 @@
 .Key {
   padding: var(--padding-xs);
 
-  color: rgb(90, 90, 90);
   background: rgb(231, 231, 231);
 
-  font-weight: bold;
-  font-size: 14px;
-
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
@@ -14,8 +11,21 @@
   transition: background ease 0.15s;
 }
 
+.Key p {
+  font-family: "Courier Prime";
+  font-weight: 700;
+  color: #4e5c65;
+}
+
 .Key:active {
   background: rgb(221, 221, 221);
+  padding-bottom: 20px;
+  transform: scaleY(1.2);
+  transform-origin: bottom;
+}
+
+.Key:active p {
+  transform: scaleX(1.2);
 }
 
 @media (max-width: 1181px) {
