@@ -18,6 +18,8 @@ const setPersonalScore = async (user: User, points: number) => {
   const previousScore = await getPersonalScore(user);
 
   await set(child(databaseRef, `ranking/${user?.id}`), {
+    id: user.googleId,
+    email: user.email,
     name: user.displayName,
     photo: user.displayPhoto,
     score: previousScore + points,
@@ -29,7 +31,17 @@ const getRanking = async () => {
 
   const snapshot = await get(child(databaseRef, "ranking"));
 
-  return snapshot.val();
+  const rankingData = snapshot.val();
+
+  const rankingEntries = Object.keys(rankingData);
+
+  const rankingCollection = rankingEntries.map(
+    (rankingEntry) => rankingData[rankingEntry]
+  );
+
+  return rankingCollection.sort((scoreA, scoreB) =>
+    scoreA.score > scoreB.score ? -1 : 1
+  );
 };
 
 export const rankingService = {

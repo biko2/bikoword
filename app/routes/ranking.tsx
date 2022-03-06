@@ -1,41 +1,39 @@
+import { useEffect, useState } from "react";
 import { Podium, links as PodiumLinks } from "~/components/Podium";
 import {
   Ranking as RankingList,
   links as RankingLinks,
 } from "~/components/Ranking";
+import { rankingService } from "~/core/services/ranking.service";
 
 export function links() {
   return [...PodiumLinks(), ...RankingLinks()];
 }
 
 const Ranking = () => {
-  const podiumData = [
-    {
-      userName: "Josu A",
-      avatar:
-        "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
-      score: 2100,
-    },
-    {
-      userName: "Josu A",
-      avatar:
-        "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
-      score: 2100,
-    },
-    {
-      userName: "Josu A",
-      avatar:
-        "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
-      score: 2100,
-    },
-  ];
+  const [rankingData, setRankingData] = useState<any[]>();
+
+  useEffect(() => {
+    (async () => {
+      const data = await rankingService.getRanking();
+      setRankingData(data ?? []);
+    })();
+  }, []);
+
+  if (!rankingData) return null;
+
+  const podiumData = rankingData.slice(0, 3);
+  const restData = rankingData.slice(3);
+
   return (
     <section className="rankingWrapper">
-      <Podium podiumData={podiumData} />
+      {!!podiumData && <Podium podiumData={podiumData.slice(0, 3)} />}
 
-      <article className="ranking">
-        <RankingList rankData={podiumData} />
-      </article>
+      {!!restData && (
+        <article className="ranking">
+          <RankingList rankData={restData} />
+        </article>
+      )}
     </section>
   );
 };
