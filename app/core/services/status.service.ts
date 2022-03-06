@@ -46,6 +46,23 @@ const getWordStatus = (guess: string[]): CharStatus[] => {
   return statuses;
 };
 
+const buildFinalGraph = (guesses: string[][]): string[][] => {
+  const guessesWithStatus = guesses.map((guess) => getWordStatus(guess));
+
+  return guessesWithStatus.map((guessWithStatus) => {
+    return guessWithStatus.map((letterStatus) => {
+      switch (letterStatus) {
+        case "correct":
+          return "🟩";
+        case "present":
+          return "🟨";
+        default:
+          return "⬜";
+      }
+    });
+  });
+};
+
 const getGuessCharsStatus = () => {
   const guesses = localStorageService.getGuesses();
   const guessesStatus = guesses.map((guessWord) => getWordStatus(guessWord));
@@ -82,5 +99,6 @@ const getGuessCharsStatus = () => {
 
 export const statusService = {
   getWordStatus,
+  buildFinalGraph,
   getGuessCharsStatus,
 };
