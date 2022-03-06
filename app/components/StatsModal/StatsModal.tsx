@@ -46,7 +46,7 @@ export const StatsModal = ({
 
   return (
     <>
-      <div className={`copiedText ${copied ? 'show' : ''}`}>¡Copiado al portapapeles!</div>}
+      <div className={`copiedText ${copied ? 'show' : ''}`}>¡Copiado al portapapeles!</div>
       <div className="statsModal">
         <div className="statsModal__content">
           <div className="statsModal__close" onClick={onClose}>
