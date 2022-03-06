@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Grid, links as GridLinks } from "~/components/Grid";
 import { Keyboard, links as KeyboardLinks } from "~/components/Keyboard";
+import { StatsModal, links as StatsModalLinks } from "~/components/StatsModal";
 import { MAX_TRIES, WORD_LENGTH } from "~/constants";
-import { gameService } from "~/core/services/game.service";
+import { gameService, GameStats } from "~/core/services/game.service";
 import { localStorageService } from "~/core/services/localStorage.service";
+import { statusService } from "~/core/services/status.service";
 import { gameUtils } from "~/core/utils/gameStatus.utils";
 
 export function links() {
-  return [...GridLinks(), ...KeyboardLinks()];
+  return [...GridLinks(), ...KeyboardLinks(), ...StatsModalLinks()];
 }
 
 const Play = () => {
@@ -15,7 +17,9 @@ const Play = () => {
   const [isGameLost, setIsGameLost] = useState<boolean>(false);
   const [wordCharacters, setWordCharacters] = useState<string[]>([]);
   const [guesses, setGuesses] = useState<string[][]>([]);
-  const [stats, setStats] = useState();
+  const [stats, setStats] = useState<GameStats>();
+  const [statsModalOpened, setStatsModalOpened] = useState<boolean>(false);
+  const [finalGraph, setFinalGraph] = useState<string[][]>([]);
 
   const isGameEnded = isGameLost || isGameWon;
 
@@ -32,7 +36,9 @@ const Play = () => {
 
   useEffect(() => {
     if (isGameEnded) {
-      console.log("game ended, check your status");
+      setStatsModalOpened(true);
+      const buildedFinalGraph = statusService.buildFinalGraph(guesses);
+      setFinalGraph(buildedFinalGraph);
     }
   }, [isGameEnded]);
 
@@ -87,6 +93,13 @@ const Play = () => {
         onKeyPress={handleKeyPress}
         onEnterPress={handleEnterPress}
         onDeletePress={handleDeletePress}
+      />
+      <StatsModal
+        isOpen={statsModalOpened}
+        finalGraph={finalGraph}
+        gameWon={isGameWon}
+        stats={stats}
+        onClose={() => setStatsModalOpened(false)}
       />
     </>
   );

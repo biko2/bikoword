@@ -5,7 +5,7 @@
 
   border: 1px solid var(--cell-border-color);
   border-radius: 10px;
-  background: #fff;
+  background: var(--light-base-color);
 
   font-weight: bold;
   font-size: 24px;
@@ -29,5 +29,5 @@
 .absent,
 .present,
 .correct {
-  color: white;
+  color: var(--light-base-color);
 }
