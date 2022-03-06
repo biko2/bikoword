@@ -1,8 +1,14 @@
 import { localStorageService } from "./localStorage.service";
 
-export type CharStatus = "absent" | "present" | "correct";
+export type CharStatus = "absent" | "present" | "correct" | string;
 
-export const getWordStatus = (guess: string[]): CharStatus[] => {
+const CHAR_STATUS = {
+  absent: "absent",
+  present: "present",
+  correct: "correct",
+};
+
+const getWordStatus = (guess: string[]): CharStatus[] => {
   const splitSolution = localStorageService.getSolution().split("");
   const splitGuess = [...guess];
 
@@ -12,7 +18,7 @@ export const getWordStatus = (guess: string[]): CharStatus[] => {
 
   splitGuess.forEach((letter, index) => {
     if (letter === splitSolution[index]) {
-      statuses[index] = "correct";
+      statuses[index] = CHAR_STATUS.correct;
       solutionCharsTaken[index] = true;
     }
   });
@@ -21,7 +27,7 @@ export const getWordStatus = (guess: string[]): CharStatus[] => {
     if (statuses[index]) return;
 
     if (!splitSolution.includes(letter)) {
-      return (statuses[index] = "absent");
+      return (statuses[index] = CHAR_STATUS.absent);
     }
 
     const indexOfPresentChar = splitSolution.findIndex(
@@ -30,11 +36,11 @@ export const getWordStatus = (guess: string[]): CharStatus[] => {
     );
 
     if (indexOfPresentChar > -1) {
-      statuses[index] = "present";
+      statuses[index] = CHAR_STATUS.present;
       return (solutionCharsTaken[indexOfPresentChar] = true);
     }
 
-    return (statuses[index] = "absent");
+    return (statuses[index] = CHAR_STATUS.absent);
   });
 
   return statuses;
@@ -46,18 +52,53 @@ const buildFinalGraph = (guesses: string[][]): string[][] => {
   return guessesWithStatus.map((guessWithStatus) => {
     return guessWithStatus.map((letterStatus) => {
       switch (letterStatus) {
-        case "absent":
-          return "⬜";
         case "correct":
           return "🟩";
         case "present":
           return "🟨";
+        default:
+          return "⬜";
       }
     });
   });
 };
 
+const getGuessCharsStatus = () => {
+  const guesses = localStorageService.getGuesses();
+  const guessesStatus = guesses.map((guessWord) => getWordStatus(guessWord));
+
+  const flattenGuessCharsStatus = guesses
+    .map((guess, guessIndex) => {
+      return guess.map((guessChar, guessCharIndex) => {
+        return {
+          key: guessChar,
+          status: guessesStatus[guessIndex][guessCharIndex],
+        };
+      });
+    })
+    .flat();
+
+  const unificatedGuessCharStatus = flattenGuessCharsStatus.map(
+    (guessCharStatus) => {
+      const charUses = flattenGuessCharsStatus.filter(
+        (char) => char.key === guessCharStatus.key
+      );
+
+      const returnKey = { key: charUses[0].key, status: CHAR_STATUS.absent };
+
+      if (charUses.find((char) => char.status === CHAR_STATUS.correct))
+        return { ...returnKey, status: CHAR_STATUS.correct };
+      if (charUses.find((char) => char.status === CHAR_STATUS.present))
+        return { ...returnKey, status: CHAR_STATUS.present };
+      return returnKey;
+    }
+  );
+
+  return unificatedGuessCharStatus;
+};
+
 export const statusService = {
   getWordStatus,
   buildFinalGraph,
+  getGuessCharsStatus,
 };

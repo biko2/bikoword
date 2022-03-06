@@ -1,11 +1,13 @@
 :root {
   --header-size: 170px;
+  --header-small-size: 130px;
 }
 
 .header {
   padding: var(--padding-xl) var(--padding-l);
 
   text-align: center;
+  background: white;
 }
 
 .navigation {
@@ -79,5 +81,33 @@
 .ranking {
   max-width: 850px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: var(--padding-s);
+}
+
+@media screen and (max-height: 800px) {
+  .header {
+    padding: var(--padding-m);
+    height: var(--header-small-size);
+  }
+
+  .site-logo {
+    width: 120px;
+  }
+
+  .navigation {
+    margin-top: var(--padding-l);
+  }
+
+  .word-grid {
+    transform: translateY(-20px);
+  }
+
+  .guess-word {
+    grid-template-columns: repeat(5, var(--cell-mobile-size));
+    grid-auto-rows: var(--cell-mobile-size);
+  }
+
+  .rankingWrapper {
+    padding-top: var(--header-small-size);
+  }
 }

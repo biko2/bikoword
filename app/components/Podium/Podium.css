@@ -71,3 +71,9 @@
   font-size: 14px;
   color: var(--business-color-3);
 }
+
+@media screen and (max-height: 800px) {
+  .podium {
+    padding-top: var(--padding-m);
+  }
+}
