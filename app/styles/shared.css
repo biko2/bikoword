@@ -67,6 +67,18 @@
   width: 150px;
 }
 
+.welcome > p {
+  margin-bottom: var(--padding-m);
+}
+
+.ctas-wrapper {
+  margin-top: var(--padding-xl);
+}
+
+.ctas-wrapper > :not(:last-child) {
+  margin-right: var(--padding-m);
+}
+
 @media screen and (min-width: 992px) {
   .site-logo {
     width: 200px;

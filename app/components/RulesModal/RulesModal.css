@@ -1,0 +1,35 @@
+.modal-container {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #00000050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: var(--padding-xxl) var(--padding-m) var(--padding-l);
+  border-radius: var(--padding-s);
+  position: relative;
+  overflow: auto;
+  max-height: 100%;
+  max-width: 600px;
+}
+
+.modal-content > p,
+.modal-content > div {
+  margin-bottom: var(--padding-m);
+}
+
+.modal-close {
+  position: absolute;
+  right: var(--padding-l);
+  top: var(--padding-l);
+
+  cursor: pointer;
+}

@@ -1,5 +1,4 @@
 import { NavLink } from "remix";
-import { loginService } from "~/core/services/login.service";
 import { useUser } from "~/hooks/useUser";
 import logo from "~/images/Logo.svg";
 import { useEffect, useState } from "react";
@@ -20,9 +19,7 @@ export const Header = () => {
       <NavLink to="/" className="header-item">
         <img src={logo} alt="logo" className="site-logo" />
       </NavLink>
-      {!user ? (
-        <button onClick={loginService.signInApp}>Iniciar sesión</button>
-      ) : (
+      {user && (
         <ul className="navigation">
           <li>
             <NavLink to="/" className="header-item">
