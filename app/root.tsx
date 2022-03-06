@@ -1,3 +1,4 @@
+import { ConfigProvider } from "react-avatar";
 import styles from "~/styles/global.css";
 import sharedStyles from "~/styles/shared.css";
 
@@ -44,7 +45,9 @@ function Document({ children }) {
         <Links />
       </head>
       <body>
-        <Layout>{children}</Layout>
+        <ConfigProvider avatarRedirectUrl="https://avatar-redirect.appspot.com">
+          <Layout>{children}</Layout>
+        </ConfigProvider>
       </body>
     </html>
   );
