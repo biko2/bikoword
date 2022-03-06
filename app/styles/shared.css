@@ -7,7 +7,7 @@
   padding: var(--padding-xl) var(--padding-l);
 
   text-align: center;
-  background: white;
+  background: var(--light-base-color);
 
   position: fixed;
   left: 0;
