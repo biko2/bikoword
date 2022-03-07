@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LinksFunction } from "remix";
 import { GameStats } from "~/core/services/game.service";
+import close from "~/images/close.svg";
 import styles from "./styles.css";
 
 interface Props {
@@ -46,15 +47,15 @@ export const StatsModal = ({
 
   return (
     <>
-      <div className={`copiedText ${copied ? 'show' : ''}`}>¡Copiado al portapapeles!</div>
+      <div className={`copiedText ${copied ? "show" : ""}`}>
+        ¡Copiado al portapapeles!
+      </div>
       <div className="statsModal">
         <div className="statsModal__content">
-          <div className="statsModal__close" onClick={onClose}>
-            ✖️
-          </div>
-          <div className="statsModal__title">
+          <img className="statsModal__close" src={close} onClick={onClose} />
+          <h2 className="statsModal__title">
             {gameWon ? "¡Así se hace!" : "¿En serio? 🦨"}
-          </div>
+          </h2>
           <div className="statsModal__graph">
             {finalGraph.map((guessGraph) =>
               guessGraph.map((letterStatus) => <div>{letterStatus}</div>)
@@ -93,7 +94,10 @@ export const StatsModal = ({
               {failedPercentage.toFixed(0)} %
             </div>
           </div>
-          <button className="statsModal__share" onClick={handleCopyClick}>
+          <button
+            className="statsModal__share button secondary"
+            onClick={handleCopyClick}
+          >
             Copiar
           </button>
         </div>
