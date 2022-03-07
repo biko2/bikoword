@@ -10,7 +10,7 @@ export function links() {
 
 export default function Index() {
   const { user, logout } = useUser();
-  const [isRulesModalOpen, setRulesModalOpen] = useState(false);
+  const [isRulesModalOpen, setRulesModalOpen] = useState<boolean>(false);
 
   const logOut = () => {
     logout();
