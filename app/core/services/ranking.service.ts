@@ -50,6 +50,8 @@ const getRanking = async () => {
 
   const rankingData = snapshot.val();
 
+  if (!rankingData) return [];
+
   const rankingEntries = Object.keys(rankingData);
 
   const rankingCollection = rankingEntries.map(
