@@ -137,3 +137,7 @@ body {
   font-weight: bold;
   margin-bottom: var(--padding-l);
 }
+
+.crossed {
+  text-decoration: line-through;
+}
