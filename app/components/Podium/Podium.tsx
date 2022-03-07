@@ -3,7 +3,7 @@ import { LinksFunction } from "remix";
 import styles from "./Podium.css";
 
 type Podium = {
-  userName: string;
+  name: string;
   photo: string;
   score: number;
   email: string;
@@ -27,13 +27,13 @@ export const Podium = ({ podiumData }: Props) => {
             src={data.photo}
             email={data.email}
             googleId={data.id}
-            name={data.userName}
+            name={data.name}
             round
             className="avatar"
             size="90"
           />
           <div className="userData">
-            <span className={`position`}>#{index + 1}</span> {data.userName}
+            <span className={`position`}>#{index + 1}</span> {data.name}
             <p className="score">{data.score} pts</p>
           </div>
         </div>
