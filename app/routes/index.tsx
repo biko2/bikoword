@@ -21,16 +21,22 @@ export default function Index() {
       <div className="welcome">
         <p>
           Bienvenido a <strong>BikoWordle</strong>,<br />
-          ¡La nueva app de Biko customizada para jugar al Wordle!
+          ¡La nueva app de Biko <strong>customizada</strong> para jugar al
+          Wordle!
         </p>
         <p>
-          Si no tienes mucha idea de cómo funciona el juego, haz{" "}
+          ¿Un Wordle para Biko? ¡No! El Wordle <strong>de</strong> Biko.
+        </p>
+        <p>
+          Si no <span className="crossed">conoces</span> sabes cómo funciona el
+          juego, aquí tienes
           <strong
             className="inner-link custom-link"
             onClick={() => setRulesModalOpen(true)}
           >
-            click aquí
+            aiuda
           </strong>
+          .
         </p>
         <p>Pero si lo tienes claro...</p>
 
