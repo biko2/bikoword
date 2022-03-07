@@ -48,6 +48,12 @@
   transform: scale(0.8);
 }
 
+.top-1 .position,
+.top-2 .position,
+.top-3 .position {
+  margin-right: var(--padding-xs);
+}
+
 .top-1 .position {
   font-size: 18px;
   color: var(--business-color);
