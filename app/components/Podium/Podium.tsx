@@ -1,10 +1,13 @@
-import type { LinksFunction } from "remix";
+import Avatar from "react-avatar";
+import { LinksFunction } from "remix";
 import styles from "./Podium.css";
 
 type Podium = {
-  userName: string;
-  avatar: string;
+  name: string;
+  photo: string;
   score: number;
+  email: string;
+  id: string;
 };
 
 type Props = {
@@ -20,9 +23,17 @@ export const Podium = ({ podiumData }: Props) => {
     <article className="podium">
       {podiumData.map((data, index) => (
         <div key={index} className={`top-${index + 1}`}>
-          <img src={data.avatar} className="avatar" />
+          <Avatar
+            src={data.photo}
+            email={data.email}
+            googleId={data.id}
+            name={data.name}
+            round
+            className="avatar"
+            size="90"
+          />
           <div className="userData">
-            <span className={`position`}>#{index + 1}</span> {data.userName}
+            <span className={`position`}>#{index + 1}</span> {data.name}
             <p className="score">{data.score} pts</p>
           </div>
         </div>

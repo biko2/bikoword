@@ -1,13 +1,11 @@
 .podium {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  column-gap: 20px;
   justify-content: center;
   padding-top: 30px;
   padding-bottom: 60px;
-}
-
-.podium > *:not(:last-child) {
-  margin-right: 20px;
 }
 
 .podium .userData {
@@ -38,11 +36,8 @@
   transform: translateY(var(--padding-xl));
 }
 
-.avatar {
-  border-radius: 50%;
-  width: var(--podium-size);
-  height: var(--podium-size);
-  object-fit: cover;
+.top-1 .avatar {
+  margin-bottom: var(--padding-xs);
 }
 
 .top-2 .avatar {
