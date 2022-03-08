@@ -10,6 +10,7 @@
   background: var(--light-base-color);
 
   position: fixed;
+  z-index: 1;
   left: 0;
   right: 0;
 }
@@ -100,6 +101,37 @@
   max-width: 850px;
   margin: auto;
   margin-top: var(--padding-s);
+}
+
+.modal-container {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #00000050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: var(--padding-xxl) var(--padding-m) var(--padding-l);
+  border-radius: var(--padding-s);
+  position: relative;
+  overflow: auto;
+  max-height: 100%;
+  max-width: 600px;
+}
+
+.modal-close {
+  position: absolute;
+  right: var(--padding-s);
+  top: var(--padding-m);
+
+  cursor: pointer;
 }
 
 @media screen and (max-height: 800px) {

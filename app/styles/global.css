@@ -4,6 +4,7 @@
 :root {
   --light-base-color: #ffffff;
   --dark-base-color: #20314b;
+  --base-color-2: #4e5c65;
   --business-color: #e73f39;
   --business-color-2: #ed6f6b;
   --business-color-3: #f39f9c;
@@ -140,4 +141,13 @@ body {
 
 .crossed {
   text-decoration: line-through;
+}
+
+.disabled-text,
+.disabled-text * {
+  color: var(--base-color-2);
+}
+
+.center {
+  text-align: center;
 }

@@ -14,7 +14,7 @@
 .Key p {
   font-family: "Courier Prime";
   font-weight: 700;
-  color: #4e5c65;
+  color: var(--base-color-2);
 }
 
 .Key:active {

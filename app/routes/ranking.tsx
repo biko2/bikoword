@@ -25,6 +25,17 @@ const Ranking = () => {
   const podiumData = rankingData.slice(0, 3);
   const restData = rankingData.slice(3);
 
+  if (rankingData.length === 0) {
+    return (
+      <section className="router">
+        <p className="disabled-text center">
+          Parece que <strong>nadie</strong> ha conseguido descifrar la palabra
+          todavía!
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section className="rankingWrapper">
       {!!podiumData && <Podium podiumData={podiumData.slice(0, 3)} />}
