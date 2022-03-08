@@ -118,7 +118,7 @@
 
 .modal-content {
   background: white;
-  padding: var(--padding-xxl) var(--padding-m) var(--padding-l);
+  padding: var(--padding-xxl) var(--padding-xl) var(--padding-l);
   border-radius: var(--padding-s);
   position: relative;
   overflow: auto;
