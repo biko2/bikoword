@@ -2,6 +2,7 @@ import { useState } from "react";
 import { LinksFunction } from "remix";
 import { GameStats } from "~/core/services/game.service";
 import styles from "./styles.css";
+import close from "~/images/close.svg";
 
 interface Props {
   isOpen: boolean;
@@ -46,18 +47,21 @@ export const StatsModal = ({
 
   return (
     <>
-      <div className={`copiedText ${copied ? 'show' : ''}`}>¡Copiado al portapapeles!</div>
-      <div className="statsModal">
-        <div className="statsModal__content">
-          <div className="statsModal__close" onClick={onClose}>
-            ✖️
-          </div>
-          <div className="statsModal__title">
+      <div className={`copiedText ${copied ? "show" : ""}`}>
+        ¡Copiado al portapapeles!
+      </div>
+      <div className="modal-container">
+        <div className="modal-content stats">
+          <img className="modal-close" src={close} onClick={onClose} />
+
+          <h2 className="title">
             {gameWon ? "¡Así se hace!" : "¿En serio? 🦨"}
-          </div>
+          </h2>
           <div className="statsModal__graph">
             {finalGraph.map((guessGraph) =>
-              guessGraph.map((letterStatus) => <div>{letterStatus}</div>)
+              guessGraph.map((letterStatus, index) => (
+                <div key={`letterStatus-${index}`}>{letterStatus}</div>
+              ))
             )}
           </div>
           <div className="statsModal__statistic">
@@ -71,13 +75,13 @@ export const StatsModal = ({
             </div>
           </div>
           <div className="statsModal__winDistribution">
-            <div className="statsModal__distributionTitle">Distribución</div>
-            {winsTree.map((victories, index) => {
+            <h3 className="title-2">Distribución</h3>
+            {winsTree.map((victories, winsIndex) => {
               const percentage = (victories * 100) / totalGames;
               const blocksToShow = Math.floor(percentage / 10);
               return (
-                <div key={index} className="statsModal__winBar">
-                  {index + 1} -
+                <div key={winsIndex} className="statsModal__winBar">
+                  <strong>{winsIndex + 1} -</strong>
                   {[...new Array(blocksToShow)].map((_, index) => (
                     <div key={index} className="statsModal__winSquare" />
                   ))}{" "}
@@ -86,16 +90,21 @@ export const StatsModal = ({
               );
             })}
             <div className="statsModal__winBar">
-              X -
+              <strong>X -</strong>
               {[...new Array(failedBlocksToShow)].map((_, index) => (
-                <div key={index} className="statsModal__winSquare" />
+                <div
+                  key={`failed-${index}`}
+                  className="statsModal__winSquare"
+                />
               ))}{" "}
               {failedPercentage.toFixed(0)} %
             </div>
           </div>
-          <button className="statsModal__share" onClick={handleCopyClick}>
-            Copiar
-          </button>
+          <div className="center">
+            <button className="button primary" onClick={handleCopyClick}>
+              Copiar
+            </button>
+          </div>
         </div>
       </div>
     </>

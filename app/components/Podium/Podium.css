@@ -16,7 +16,7 @@
 .podium .score {
   font-family: "Courier Prime";
   font-weight: normal;
-  color: #4e5c65;
+  color: var(--base-color-2);
 }
 
 .top-1,
