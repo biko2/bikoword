@@ -101,7 +101,7 @@ export const StatsModal = ({
             </div>
           </div>
           <div className="center">
-            <button className="button primary" onClick={handleCopyClick}>
+            <button className="button secondary" onClick={handleCopyClick}>
               Copiar
             </button>
           </div>

@@ -70,11 +70,13 @@
 }
 
 .ctas-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: var(--padding-m);
+  row-gap: var(--padding-m);
   margin-top: var(--padding-xl);
-}
-
-.ctas-wrapper > :not(:last-child) {
-  margin-right: var(--padding-m);
 }
 
 @media screen and (min-width: 992px) {

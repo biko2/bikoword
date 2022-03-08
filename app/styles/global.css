@@ -139,6 +139,10 @@ body {
   margin-bottom: var(--padding-l);
 }
 
+.crossed {
+  text-decoration: line-through;
+}
+
 .disabled-text,
 .disabled-text * {
   color: var(--base-color-2);
