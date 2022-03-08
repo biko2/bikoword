@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { LinksFunction } from "remix";
 import { GameStats } from "~/core/services/game.service";
-import close from "~/images/close.svg";
 import styles from "./styles.css";
 import close from "~/images/close.svg";
 
