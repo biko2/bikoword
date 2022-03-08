@@ -29,7 +29,7 @@ const Ranking = () => {
     return (
       <section className="router">
         <p className="disabled-text center">
-          Parece que <strong>Nadie</strong> ha conseguido descifrar la palabra
+          Parece que <strong>nadie</strong> ha conseguido descifrar la palabra
           todavía!
         </p>
       </section>
