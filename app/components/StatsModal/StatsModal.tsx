@@ -47,7 +47,7 @@ export const StatsModal = ({
 
   return (
     <>
-      <div className={`copiedText ${copied ? "show" : ""}`}>
+      <div className={`tooltip ${copied ? "show" : ""}`}>
         ¡Copiado al portapapeles!
       </div>
       <div className="modal-container">
