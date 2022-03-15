@@ -23,7 +23,8 @@
   --padding-xxl: 48px;
 
   --cell-size: 60px;
-  --cell-mobile-size: 50px;
+  --cell-small-size: 50px;
+  --cell-xsmall-size: 40px;
   --podium-size: 90px;
 }
 

@@ -24,6 +24,8 @@
 .rankingRow .position {
   font-weight: bold;
   margin-right: var(--padding-l);
+  display: inline-block;
+  width: var(--padding-l);
 }
 
 .rankingRow .score {
