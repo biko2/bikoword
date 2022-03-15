@@ -6,6 +6,7 @@ import { MAX_TRIES, WORD_LENGTH } from "~/constants";
 import { gameService, GameStats } from "~/core/services/game.service";
 import { localStorageService } from "~/core/services/localStorage.service";
 import { statusService } from "~/core/services/status.service";
+import { wordsService } from "~/core/services/words.service";
 import { gameUtils } from "~/core/utils/gameStatus.utils";
 
 export function links() {
@@ -20,6 +21,7 @@ const Play = () => {
   const [stats, setStats] = useState<GameStats>();
   const [statsModalOpened, setStatsModalOpened] = useState<boolean>(false);
   const [finalGraph, setFinalGraph] = useState<string[][]>([]);
+  const [showError, setShowError] = useState<boolean>(false);
 
   const isGameEnded = isGameLost || isGameWon;
 
@@ -48,9 +50,20 @@ const Play = () => {
     return setWordCharacters((previous: string[]) => [...previous, pressedKey]);
   };
 
-  const handleEnterPress = () => {
+  const handleEnterPress = async () => {
     if (isGameEnded || wordCharacters.length !== WORD_LENGTH) {
       return;
+    }
+
+    const word = wordCharacters.join("");
+
+    const wordInList = await wordsService.isInWordlist(word);
+
+    if (!wordInList) {
+      setShowError(true);
+      return setTimeout(() => {
+        setShowError(false);
+      }, 2500);
     }
 
     setGuesses([...guesses, wordCharacters]);
@@ -87,6 +100,9 @@ const Play = () => {
 
   return (
     <>
+      <div className={`tooltip ${showError ? "show" : ""}`}>
+        La palabra no es una opción válida
+      </div>
       <Grid guesses={guesses} currentGuess={wordCharacters} />
       <Keyboard
         guesses={guesses}

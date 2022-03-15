@@ -4,29 +4,6 @@
   width: 100%;
 }
 
-.copiedText {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--dark-base-color);
-  color: var(--light-base-color);
-  width: 300px;
-  text-align: center;
-
-  padding: var(--padding-m) var(--padding-m);
-
-  z-index: 3;
-  visibility: hidden;
-  border-radius: 4px;
-  transition: visibility 0.5s;
-}
-
-.copiedText.show {
-  visibility: visible;
-  transition: visibility 0.5s;
-}
-
 .stats .title {
   font-size: 32px;
 }
