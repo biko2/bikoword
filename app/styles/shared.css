@@ -1,6 +1,7 @@
 :root {
-  --header-size: 170px;
+  --header-size: 210px;
   --header-small-size: 130px;
+  --header-xsmall-size: 100px;
 }
 
 .header {
@@ -13,6 +14,8 @@
   z-index: 1;
   left: 0;
   right: 0;
+
+  height: var(--header-size);
 }
 
 .navigation {
@@ -134,7 +137,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-height: 800px) {
+@media screen and (max-height: 850px) {
   .header {
     padding: var(--padding-m);
     height: var(--header-small-size);
@@ -153,12 +156,35 @@
   }
 
   .guess-word {
-    grid-template-columns: repeat(5, var(--cell-mobile-size));
-    grid-auto-rows: var(--cell-mobile-size);
+    grid-template-columns: repeat(5, var(--cell-small-size));
+    grid-auto-rows: var(--cell-small-size);
   }
 
   .rankingWrapper {
     padding-top: var(--header-small-size);
+  }
+}
+
+@media screen and (max-height: 650px) {
+  .header {
+    height: var(--header-xsmall-size);
+  }
+
+  .site-logo {
+    width: 100px;
+  }
+
+  .rankingWrapper {
+    padding-top: var(--header-xsmall-size);
+  }
+
+  .guess-word {
+    grid-template-columns: repeat(5, var(--cell-xsmall-size));
+    grid-auto-rows: var(--cell-xsmall-size);
+  }
+
+  .router {
+    padding-top: var(--header-xsmall-size);
   }
 }
 
