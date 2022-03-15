@@ -2,14 +2,24 @@ import { app } from "../infrastructure/firebase";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import { User } from "./userCookie.service";
 
-const getPersonalScore = async (user: User): Promise<number> => {
+interface PersonalScore {
+  score: number;
+  timestamp: number;
+}
+const defaultTimestamp = new Date("March 14, 2022").getTime();
+
+const getPersonalScore = async (user: User): Promise<PersonalScore> => {
   const databaseRef = ref(getDatabase(app));
 
   const snapshot = await get(child(databaseRef, `ranking/${user.id}`));
 
   const userScore = snapshot.val();
 
-  return userScore?.score ?? 0;
+  if (!userScore) {
+    return { score: 0, timestamp: defaultTimestamp };
+  }
+
+  return { score: userScore?.score, timestamp: userScore?.timestamp };
 };
 
 const getProcessedName = (name: string): string => {
@@ -27,20 +37,46 @@ const getProcessedName = (name: string): string => {
   return processedName;
 };
 
+const isDifferentDay = (timestamp: number): boolean => {
+  const today = new Date();
+  const playDate = new Date(timestamp);
+
+  const todayDay = today.getDate();
+  const todayMonth = today.getMonth();
+
+  const playDateDay = playDate.getDate();
+  const playDateMonth = playDate.getMonth();
+
+  if (playDateMonth !== todayMonth) {
+    return true;
+  }
+
+  if (playDateDay !== todayDay) {
+    return true;
+  }
+
+  return false;
+};
+
 const setPersonalScore = async (user: User, points: number) => {
   const databaseRef = ref(getDatabase(app));
 
   const previousScore = await getPersonalScore(user);
 
-  const nameToShow = getProcessedName(user.displayName);
+  if (isDifferentDay(previousScore?.timestamp)) {
+    const nameToShow = getProcessedName(user.displayName);
 
-  await set(child(databaseRef, `ranking/${user?.id}`), {
-    id: user.googleId,
-    email: user.email,
-    name: nameToShow,
-    photo: user.displayPhoto,
-    score: previousScore + points,
-  });
+    await set(child(databaseRef, `ranking/${user?.id}`), {
+      id: user.googleId,
+      email: user.email,
+      name: nameToShow,
+      photo: user.displayPhoto,
+      score: previousScore.score + points,
+      timestamp: new Date().getTime(),
+    });
+  }
+
+  return;
 };
 
 const getRanking = async () => {
