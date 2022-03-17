@@ -89,3 +89,13 @@
 .statsModal__winSquare:first-child {
   margin-left: var(--padding-xs);
 }
+
+.statsModal__solution {
+  text-align: center;
+  margin-bottom: var(--padding-l);
+}
+
+.statsModal__solutionTitle {
+  margin-bottom: var(--padding-xs);
+  text-align: center;
+}

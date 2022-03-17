@@ -28,7 +28,7 @@ const getTimingPoints = (timeInSeconds?: number): number => {
 
 const getTriesPoints = (tries: number): number => {
   const tryPoints = scoring.tries;
-  return tryPoints[tries - 1];
+  return tryPoints[tries - 1] ?? 0;
 };
 
 const getTotalPoints = (

@@ -3,6 +3,7 @@ import { LinksFunction } from "remix";
 import { GameStats } from "~/core/services/game.service";
 import styles from "./styles.css";
 import close from "~/images/close.svg";
+import { localStorageService } from "~/core/services/localStorage.service";
 
 interface Props {
   isOpen: boolean;
@@ -38,7 +39,7 @@ export const StatsModal = ({
       .map((lineGraph) => lineGraph.join(""))
       .join("\n");
 
-    const message = `BikoWordle ${tries}/6\n\n${stringifiedGraph}\n\n${window.location.origin}`;
+    const message = `BikoWordle #${totalGames} ${tries}/6\n\n${stringifiedGraph}\n\n${window.location.origin}`;
 
     navigator.clipboard.writeText(message);
     setCopied(true);
@@ -54,7 +55,7 @@ export const StatsModal = ({
         <div className="modal-content stats">
           <img className="modal-close" src={close} onClick={onClose} />
 
-          <h2 className="title">
+          <h2 className="title text-center">
             {gameWon ? "¡Así se hace!" : "¿En serio? 🦨"}
           </h2>
           <div className="statsModal__graph">
@@ -64,6 +65,14 @@ export const StatsModal = ({
               ))
             )}
           </div>
+          {!gameWon && (
+            <div className="statsModal__solution">
+              <p className="statsModal__solutionTitle">La palabra de hoy era</p>
+              <span className="text-bold">
+                {localStorageService.getSolution()}
+              </span>
+            </div>
+          )}
           <div className="statsModal__statistic">
             <div>
               <p className="statsModal__stat">{totalGames}</p>

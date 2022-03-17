@@ -152,3 +152,7 @@ body {
 .center {
   text-align: center;
 }
+
+.text-bold {
+  font-weight: bold;
+}
